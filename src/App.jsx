@@ -1,22 +1,31 @@
 import { useState,useRef } from 'react'
 import {TextField,Button, Stack} from '@mui/material/'
+import ForecastList from './components/ForecastList'
 import axios from 'axios'
 import './App.css'
 
 const API_KEY = 'dc350a4d62c5eda7e3adc31cb1df51b8'
-const BASE_URL = 'https://api.openweathermap.org/data/2.5/weather'
+const BASE_URL = 'https://api.openweathermap.org/data/2.5/forecast'
 function App() {
   const textRef = useRef();
   const [forecast, setForecast] = useState(null)
   const [error, setError] = useState(null)
+
+  
+
+  function cleanRenderedState(){
+    setError(null)
+    setForecast(null)
+  }
   async function handleSubmit(){
     try{
-      setError(null)
+
+      cleanRenderedState()
       const [fieldType , fieldValue] =  handleInputType();
       const response = await axios.get(`${BASE_URL}?${fieldType}=${fieldValue}&appid=${API_KEY}`)
       // const data = response.data
-      setForecast(response.data)
-      console.log(response.data)
+      setForecast(response.data.list.filter((w,i) => i % 8 === 0))
+      console.log(response.data.list.filter((w,i) => i % 8 === 0))
     }catch(error){
       console.log(error)
       setError(error)
@@ -43,6 +52,7 @@ function App() {
     <Button variant="outlined" onClick={handleSubmit}>Search</Button>
     </Stack>
     {error && <p>Something went wrong</p>}
+    <ForecastList forecast={forecast}/>
     </>
   )
 }
