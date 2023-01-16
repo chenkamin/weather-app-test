@@ -2,7 +2,7 @@ import { useState,useRef } from 'react'
 import {TextField,Button, Stack} from '@mui/material/'
 import ForecastList from './components/ForecastList'
 import axios from 'axios'
-// import './App.css'
+import './App.css'
 
 const API_KEY = 'dc350a4d62c5eda7e3adc31cb1df51b8'
 const BASE_URL = 'https://api.openweathermap.org/data/2.5/forecast'
@@ -22,7 +22,6 @@ function App() {
     return await axios.get(`${BASE_URL}?${fieldType}=${fieldValue}&appid=${API_KEY}`);
   }
   async function manipulteForDaysNeeded(list){
-    console.log(calcultedDays)
     const res = list.filter((w,i) => i % 8 === 0)
     return res
   }
@@ -34,9 +33,7 @@ function App() {
       const response = await handleAjax(fieldType,fieldValue)
       const daysForecast = await manipulteForDaysNeeded(response.data.list, null)
       setForecast(daysForecast)
-      console.log(daysForecast)
     }catch(error){
-      console.log(error)
       setError(error)
     }
   }
@@ -45,7 +42,6 @@ function App() {
   let fieldType ;
     const fieldValue = textRef.current.value
     if(/\d/.test(fieldValue)){
-      console.log('zip')
       fieldType= 'zip'
     }else{
       fieldType = 'q'

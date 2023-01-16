@@ -1,10 +1,7 @@
-import Box from '@mui/material/Box';
 import {Card,CardActions,CardContent,Button,Typography} from '@mui/material';
 
 
-//current temperature, humidity, wind speed, and a weather icon.
 function Forecast({data}) {
-    // console.log(data,'DDDD')
 
     const ICON_URL = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
     return (<>
