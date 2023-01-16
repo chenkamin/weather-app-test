@@ -2,6 +2,6 @@
 
 # To run the project
 
-- Clone the repo
+- clone the repo
 - npm i
 - npm run dev
