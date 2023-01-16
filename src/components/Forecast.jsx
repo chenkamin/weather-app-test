@@ -3,7 +3,7 @@ import {Card,CardActions,CardContent,Button,Typography} from '@mui/material';
 
 function Forecast({data}) {
 
-    const ICON_URL = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
+    const ICON_URL = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
     return (<>
    <Card sx={{ minWidth: 275 }}>
       <CardContent>
