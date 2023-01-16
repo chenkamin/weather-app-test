@@ -2,7 +2,7 @@ import { useState,useRef } from 'react'
 import {TextField,Button, Stack} from '@mui/material/'
 import ForecastList from './components/ForecastList'
 import axios from 'axios'
-import './App.css'
+// import './App.css'
 
 const API_KEY = 'dc350a4d62c5eda7e3adc31cb1df51b8'
 const BASE_URL = 'https://api.openweathermap.org/data/2.5/forecast'
@@ -17,15 +17,24 @@ function App() {
     setError(null)
     setForecast(null)
   }
+
+  async function handleAjax(fieldType,fieldValue){
+    return await axios.get(`${BASE_URL}?${fieldType}=${fieldValue}&appid=${API_KEY}`);
+  }
+  async function manipulteForDaysNeeded(list){
+    console.log(calcultedDays)
+    const res = list.filter((w,i) => i % 8 === 0)
+    return res
+  }
+
   async function handleSubmit(){
     try{
-
       cleanRenderedState()
       const [fieldType , fieldValue] =  handleInputType();
-      const response = await axios.get(`${BASE_URL}?${fieldType}=${fieldValue}&appid=${API_KEY}`)
-      // const data = response.data
-      setForecast(response.data.list.filter((w,i) => i % 8 === 0))
-      console.log(response.data.list.filter((w,i) => i % 8 === 0))
+      const response = await handleAjax(fieldType,fieldValue)
+      const daysForecast = await manipulteForDaysNeeded(response.data.list, null)
+      setForecast(daysForecast)
+      console.log(daysForecast)
     }catch(error){
       console.log(error)
       setError(error)

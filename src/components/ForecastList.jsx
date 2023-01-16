@@ -1,6 +1,6 @@
 import Forecast from './Forecast'
 import Grid from '@mui/material/Grid'; // Grid version 1
-import '../App.css'
+// import '../App.css'
 function ForecastList({forecast}) {
     return (
     <>
