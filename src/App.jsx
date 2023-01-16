@@ -4,7 +4,7 @@ import ForecastList from './components/ForecastList'
 import axios from 'axios'
 import './App.css'
 
-const API_KEY = 'dc350a4d62c5eda7e3adc31cb1df51b8';
+const API_KEY = 'XXX';
 const BASE_URL = 'https://api.openweathermap.org/data/2.5/forecast';
 function App() {
   const textRef = useRef();
