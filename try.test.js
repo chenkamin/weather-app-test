@@ -23,9 +23,6 @@ describe('handleSubmit', () => {
   let setErrorMock = jest.fn();
 
   beforeEach(() => {
-    handleInputTypeMock.mockReturnValue(['q', 'los angeles']);
-    handleAjaxMock.mockResolvedValue({ data: { list: [{ weather: 'sunny' }] } });
-    manipulateForDaysNeededMock.mockReturnValue([{ weather: 'sunny' }]);
     wrapper = mount(<App 
       cleanRenderedState={cleanRenderedStateMock} 
       handleInputType={handleInputTypeMock} 
@@ -44,32 +41,5 @@ describe('handleSubmit', () => {
   it('should call cleanRenderedState', async () => {
     await instance.handleSubmit();
     expect(cleanRenderedStateMock).toHaveBeenCalled();
-  });
-
-  // it('should call handleInputType and destructure the returned values', async () => {
-  //   await instance.handleSubmit();
-  //   expect(handleInputTypeMock).toHaveBeenCalled();
-  //   expect(handleAjaxMock).toHaveBeenCalledWith('q', 'los angeles');
-  // });
-
-  // it('should call handleAjax with the correct arguments', async () => {
-  //   await instance.handleSubmit();
-  //   expect(handleAjaxMock).toHaveBeenCalledWith('q', 'los angeles');
-  // });
-
-  // it('should call manipulateForDaysNeeded', async () => {
-  //   await instance.handleSubmit();
-  //   expect(manipulateForDaysNeededMock).toHaveBeenCalledWith({ data: { list: [{ weather: 'sunny' }] } }, null);
-  // });
-
-  // it('should call setForecast with the correct data', async () => {
-  //   await instance.handleSubmit();
-  //   expect(setForecastMock).toHaveBeenCalledWith([{ weather: 'sunny' }]);
-  // });
-
-  // it('should call setError with the correct error message', async () => {
-  //   handleAjaxMock.mockRejectedValue(new Error('test error'));
-  //   await instance.handleSubmit();
-  //   expect(setErrorMock).toHaveBeenCalledWith(new Error('test error'));
-  // });
+  })
 });
